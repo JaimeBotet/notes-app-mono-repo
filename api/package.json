@@ -1,0 +1,41 @@
+{
+  "name": "back",
+  "version": "1.0.0",
+  "description": "",
+  "repository": "https://github.com/JaimeBotet/fullStack-bootcamp",
+  "main": "index.js",
+  "scripts": {
+    "start": "set NODE_ENV=production node index.js",
+    "start:test": "set NODE_ENV=test && node index.js",
+    "dev": "set NODE_ENV=development && nodemon index.js",
+    "test": "set NODE_ENV=test PORT=3008 jest --verbose --silent",
+    "test:notes": "npm run test -- --watch tests/notes.test.js",
+    "test:users": "npm run test -- tests/users.test.js",
+    "build:ui": "rm -rf build && cd ../front && npm run build --prod && cp -r build ../back/ && cd ../back",
+    "deploy": "git push heroku main",
+    "deploy:back": "git add . && git commit -m backendbuild && npm run deploy",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
+    "logs:prod": "heroku logs --tail"
+  },
+  "author": "",
+  "license": "ISC",
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "devDependencies": {
+    "jest": "29.6.2",
+    "nodemon": "3.0.1",
+    "supertest": "6.3.3"
+  },
+  "dependencies": {
+    "@sentry/node": "7.61.1",
+    "@sentry/tracing": "7.61.1",
+    "bcrypt": "5.1.0",
+    "cors": "2.8.5",
+    "dotenv": "16.3.1",
+    "express": "4.18.2",
+    "jsonwebtoken": "9.0.1",
+    "mongoose": "7.4.2",
+    "mongoose-unique-validator": "4.0.0"
+  }
+}

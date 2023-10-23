@@ -1,0 +1,9 @@
+POST http://localhost:3001/api/notes/ 
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjc0MGQ1MTAxNmRjMWU3MDEzODk5NCIsInVzZXJuYW1lIjoiamJvdGV0IiwiaWF0IjoxNjc3MjQ2NDE1LCJleHAiOjE2NzczMzI4MTV9.7wjNfuu2hg5BHoxSmrPqXe8bH6euF6nY0IPz1oGi1zQ
+
+{
+	"content": "otra nota mas con auth middleware con otro nuevo token valido",
+	"important": true,
+	"userId": "63f740d51016dc1e70138994"
+}
