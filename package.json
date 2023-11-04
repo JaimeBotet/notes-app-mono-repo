@@ -8,9 +8,6 @@
 	"api",
 	"app"
   ],
-  "engines": {
-	"npm": "9.5.0"
-  },
   "scripts": {
     "build": "set SKIP_PREFLIGHT_CHECK=true && npm run build -w app",
 	"start": "npm run start -w api",
