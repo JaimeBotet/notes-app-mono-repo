@@ -5,7 +5,7 @@
   "repository": "https://github.com/JaimeBotet/fullStack-bootcamp",
   "main": "index.js",
   "scripts": {
-    "start": "set NODE_ENV=production node index.js",
+    "start": "set NODE_ENV=production && node index.js",
     "start:test": "set NODE_ENV=test && node index.js",
     "dev": "set NODE_ENV=development && nodemon index.js",
     "test": "set NODE_ENV=test PORT=3008 jest --verbose --silent",
