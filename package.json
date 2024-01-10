@@ -15,6 +15,7 @@
   "scripts": {
     "build": "set SKIP_PREFLIGHT_CHECK=true && npm run build -w app",
 	"start": "npm run start -w api",
+	"dev:app": "set SKIP_PREFLIGHT_CHECK=true && npm run start -w app",
 	"dev:api": "npm run build && npm run dev -w api"
   },
   "keywords": [],

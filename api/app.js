@@ -22,7 +22,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(requestLogger)
-app.use(express.static('../app/build'))
+app.use(express.static('../app/build')) // Esta sirviendo la APP desde ../app/build en el puerto 3001 en la ruta '/'
 
 Sentry.init({
 	dsn: "https://86ccf42b164f4bf0b45c574aca80741c@o4504288794640384.ingest.sentry.io/4504288799948800",
