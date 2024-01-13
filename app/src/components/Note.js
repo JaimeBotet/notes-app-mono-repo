@@ -1,12 +1,11 @@
 import React from "react"; 
+import { Link } from "react-router-dom";
 
 const Note = (props) => {
-	const {content, date} = props
+	const {content, date, id} = props
 	return (
 		<li className="note">
-			<div>
-				{content}
-			</div>
+			<Link to={'/notes/' + id}>{content}</Link>
 			<small>{date}</small>
 		</li>
 	)

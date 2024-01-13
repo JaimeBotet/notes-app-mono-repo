@@ -1,37 +1,31 @@
 import React from 'react'
-import Togglable from './Togglable'
 import PropTypes from 'prop-types'
 
-const NO_OP = () => {}
-export default function LoginForm ({ handleSubmit = NO_OP, handleUsernameChange, handlePasswordChange, username, password}) {
+export default function LoginForm ({ handleSubmit, ...props}) {
 	return (
-		<Togglable btnLabel='SHOW LOGIN'>
-			<form data-test-id='login-form' onSubmit={handleSubmit}>
-				<div>
-					<input 
-					type='text' 
-					value={username}
+		<form onSubmit={handleSubmit}>
+			<div>
+				<input 
+					type='text'
+					value={props.username}
 					name='Username'
 					placeholder='Username'
-					onChange={handleUsernameChange}
-					/>
-				</div>
-
-				<div>
-					<input 
+					onChange={props.handleUsernameChange}
+				/>
+			</div>
+			<div>
+				<input 
 					type='password' 
-					value={password}
+					value={props.password}
 					name='Password'
 					placeholder='Password'
-					onChange={handlePasswordChange}
-					/>
-				</div>
-
-				<div>
-					<button>Login</button>
-				</div>
-			</form>
-		</Togglable>
+					onChange={props.handlePasswordChange}
+				/>
+			</div>
+			<div>
+				<button>Login</button>
+			</div>
+		</form>
 	)
 }
 
