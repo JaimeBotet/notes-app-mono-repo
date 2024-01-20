@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LoginForm from './components/LoginFrom';
 import { setToken} from './services/notes'
 import { login } from './services/login'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, redirect } from 'react-router-dom';
 
 
 export default function Login(props){
@@ -11,6 +11,17 @@ export default function Login(props){
 	const [password, setPassword] = useState('')
 	const [user, setUser] = useState(null)
 	const [errorMessage, setErrorMessage] 	= useState('')
+
+	useEffect( () => {
+		const loggedUserJson = localStorage.getItem('loggedNoteAppUser')
+		if(loggedUserJson){
+			const user = JSON.parse(loggedUserJson)
+			setUser(user);
+			setToken(user.token)
+			redirect('/')
+		}
+	}, [])
+
 
 	const handleLogin = async (event) => {
 		event.preventDefault()
@@ -36,9 +47,11 @@ export default function Login(props){
 		}
 	}
 
-	if(errorMessage) return <p>{errorMessage}</p>
+	console.log('User in Login: ')
+	console.log(user)
 
-	if(user) return <p>User is logged!</p>
+	// if(user) return redirect("/")
+	if(errorMessage) return <p>{errorMessage}</p>
 
 	return (
 		<LoginForm 

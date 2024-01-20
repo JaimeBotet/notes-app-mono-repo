@@ -18,7 +18,6 @@ const Notes = (props) => {
 		setLoading(true)
 		getAll()
 		.then( notes => {
-			console.log(notes)
 			setNotes(notes)
 			setLoading(false)
 		})

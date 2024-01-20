@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react"
-import { Link, BrowserRouter, Route, Routes } from "react-router-dom"
+import { Link, BrowserRouter, Route, Routes, redirect } from "react-router-dom"
 import Notes from './Notes'
 import Login from './Login'
 import Logout from './components/Logout';
@@ -34,6 +34,8 @@ const App = () => {
 		}
 	}, [])
 
+	console.log('User in App: ')
+	console.log(user)
 	return (
 		<BrowserRouter>
 			<header>
@@ -61,10 +63,9 @@ const App = () => {
 					path='/notes/:noteId' 
 					element={<NoteDetail notes={notes} />}
 				/>
-
 				<Route path='/notes' element={<Notes />} />
 				<Route path='/users' element={<Users />} />
-				<Route path='/login' element={<Login />} />
+				<Route path='/login' element={<Login />}/>
 				<Route path='/' element={<Home />} />
 			</Routes>
 		</BrowserRouter>
