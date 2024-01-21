@@ -1,21 +1,12 @@
-import React, {useState} from 'react'
-import { useNavigate } from "react-router-dom"
-import { getAll, create, setToken} from '../services/notes'
+import React from 'react'
+import { useUser } from '../hooks/useUser'
 
 export default function Logout (props) {
-	const navigate = useNavigate()
-	const [user, setUser] = useState(null)
-
-	const handleLogout = () => {
-		setToken(null)
-		setUser(null)
-		localStorage.removeItem('loggedNoteAppUser')
-		navigate('/login')
-	}
+	const { user, logout} = useUser()
 
 	return (
 		<span>
-			<button onClick={handleLogout}>Logout</button>
+			<button onClick={() => logout()}>Logout</button>
 		</span>
 	)
 }

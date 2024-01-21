@@ -6,7 +6,6 @@ export const NoteDetail = ({notes}) => {
 	const note = notes.find( note => note.id === noteId)
 	if (!note) return null
 
-
 	return (
 		<div>
 			<h2>{note.content}</h2>

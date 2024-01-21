@@ -1,41 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import LoginForm from './components/LoginFrom';
-import { setToken} from './services/notes'
-import { login } from './services/login'
 import { useNavigate, redirect } from 'react-router-dom';
-
+import { useUser } from './hooks/useUser'
 
 export default function Login(props){
 	const navigate = useNavigate()
 	const [username, setUsername] = useState('')
 	const [password, setPassword] = useState('')
-	const [user, setUser] = useState(null)
+	const { user, login } = useUser()
 	const [errorMessage, setErrorMessage] 	= useState('')
-
-	useEffect( () => {
-		const loggedUserJson = localStorage.getItem('loggedNoteAppUser')
-		if(loggedUserJson){
-			const user = JSON.parse(loggedUserJson)
-			setUser(user);
-			setToken(user.token)
-			redirect('/')
-		}
-	}, [])
-
 
 	const handleLogin = async (event) => {
 		event.preventDefault()
 
 		try {
-			const user = await login({
-				username,
-				password
-			})
+			login({username, password})
 
-			localStorage.setItem('loggedNoteAppUser', JSON.stringify(user))
-
-			setToken(user.token);
-			setUser(user);
 			setUsername('')
 			setPassword('')
 			navigate('/notes')
@@ -43,12 +23,9 @@ export default function Login(props){
 			setErrorMessage('Wrong Credentials')
 			setTimeout( () => {
 				setErrorMessage('')
-			}, 3000)
+			}, 5000)
 		}
 	}
-
-	console.log('User in Login: ')
-	console.log(user)
 
 	// if(user) return redirect("/")
 	if(errorMessage) return <p>{errorMessage}</p>

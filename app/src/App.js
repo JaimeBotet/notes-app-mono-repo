@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from "react"
+import React from "react"
 import { Link, BrowserRouter, Route, Routes, redirect } from "react-router-dom"
 import Notes from './Notes'
 import Login from './Login'
 import Logout from './components/Logout';
 import { NoteDetail } from "./components/NoteDetail"
-import { getAll, create, setToken} from './services/notes'
+import { useUser } from './hooks/useUser'
+import { useNotes } from './hooks/useNotes'
 
 const Home = () => <h1>Home Page</h1>
 
@@ -15,27 +16,9 @@ const inlineStyles = {
 }
 
 const App = () => {
-	const [notes, setNotes] = useState([])
-	const [user, setUser] = useState(null)
+	const { user } = useUser()
+	const { notes } = useNotes()
 
-	useEffect( () => {
-		getAll()
-		.then( initialNotes => {
-			setNotes(initialNotes)
-		})
-	}, [])
-
-	useEffect( () => {
-		const loggedUserJson = localStorage.getItem('loggedNoteAppUser')
-		if(loggedUserJson){
-			const user = JSON.parse(loggedUserJson)
-			setUser(user);
-			setToken(user.token)
-		}
-	}, [])
-
-	console.log('User in App: ')
-	console.log(user)
 	return (
 		<BrowserRouter>
 			<header>
@@ -55,7 +38,6 @@ const App = () => {
 						? <Logout />
 						: <Link to='/login' style={inlineStyles}>Login</Link>
 				}
-
 			</header>
 
 			<Routes>
