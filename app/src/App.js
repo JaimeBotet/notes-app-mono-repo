@@ -6,6 +6,7 @@ import Logout from './components/Logout';
 import { NoteDetail } from "./components/NoteDetail"
 import { useUser } from './hooks/useUser'
 import { useNotes } from './hooks/useNotes'
+import { Nav, Navbar } from "react-bootstrap";
 
 const Home = () => <h1>Home Page</h1>
 
@@ -21,24 +22,40 @@ const App = () => {
 
 	return (
 		<BrowserRouter>
-			<header>
-				<Link to='/' style={inlineStyles}>
-					Home
-				</Link>
-				
-				<Link to='/notes' style={inlineStyles}>
-					Notes
-				</Link>
-				
-				<Link to='/users' style={inlineStyles}>
-					Users
-				</Link>
-				{
-					user 
-						? <Logout />
-						: <Link to='/login' style={inlineStyles}>Login</Link>
-				}
-			</header>
+		<div className="container">
+			<Navbar collapseOnSelect expand='lg'>
+				<Navbar.Toggle aria-controls="responsive-narvbar-nav" />
+
+				<Navbar.Collapse>
+					<Nav>
+						<Nav.Link>
+							<Link to='/' style={inlineStyles}>
+								Home
+							</Link>
+						</Nav.Link>
+						
+						<Nav.Link>
+							<Link to='/notes' style={inlineStyles}>
+								Notes
+							</Link>
+						</Nav.Link>
+
+						<Nav.Link>
+							<Link to='/users' style={inlineStyles}>
+								Users
+							</Link>
+						</Nav.Link>
+
+						<Nav.Link>
+							{
+								user 
+									? <Logout />
+									: <Link to='/login' style={inlineStyles}>Login</Link>
+							}
+						</Nav.Link>
+					</Nav>
+				</Navbar.Collapse>
+			</Navbar>
 
 			<Routes>
 				<Route 
@@ -50,6 +67,7 @@ const App = () => {
 				<Route path='/login' element={<Login />}/>
 				<Route path='/' element={<Home />} />
 			</Routes>
+		</div>
 		</BrowserRouter>
 	)
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 // import PropTypes from 'prop-types'
 import { useUser } from '../hooks/useUser'
 import { useNavigate } from 'react-router-dom';
+import { Form, Button } from 'react-bootstrap'
 
 const useField = ({type}) => {
 	const [value, setValue] = useState('')
@@ -16,7 +17,6 @@ const useField = ({type}) => {
 		onChange
 	}
 }
-
 
 export default function LoginForm () {
 	const navigate = useNavigate()
@@ -45,25 +45,25 @@ export default function LoginForm () {
 	if(errorMessage) return <p>{errorMessage}</p>
 
 	return (
-		<form onSubmit={handleLogin}>
-			<div>
-				<input 
+		<Form onSubmit={handleLogin}>
+			<Form.Group id='uisername'>
+				<Form.Control 
 					{...username}
 					name='Username'
 					placeholder='Username'
 				/>
-			</div>
-			<div>
-				<input 
+			</Form.Group>
+			<Form.Group id='password'>
+				<Form.Control 
 					{...password}
 					name='Password'
 					placeholder='Password'
 				/>
-			</div>
-			<div>
-				<button>Login</button>
-			</div>
-		</form>
+			</Form.Group>
+			<Button id='from-login-button'>
+				Login
+			</Button>
+		</Form>
 	)
 }
 
