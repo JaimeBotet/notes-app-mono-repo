@@ -1,14 +1,12 @@
-import React from "react"
+import React, {useState} from "react"
 import { Link, BrowserRouter, Route, Routes, redirect } from "react-router-dom"
 import Notes from './Notes'
 import Login from './Login'
-import Logout from './components/Logout';
 import { NoteDetail } from "./components/NoteDetail"
 import { useUser } from './hooks/useUser'
 import { useNotes } from './hooks/useNotes'
 
 const Home = () => <h1>Home Page</h1>
-
 const Users = () => <h1>Users</h1>
 
 const inlineStyles = {
@@ -16,7 +14,8 @@ const inlineStyles = {
 }
 
 const App = () => {
-	const { user } = useUser()
+	const [user, setUser] = useState()
+	const { logout, login } = useUser(user, setUser)
 	const { notes } = useNotes()
 
 	return (
@@ -35,7 +34,7 @@ const App = () => {
 				</Link>
 				{
 					user 
-						? <Logout />
+						? <Link onClick={() => logout()}>Logout</Link>
 						: <Link to='/login' style={inlineStyles}>Login</Link>
 				}
 			</header>
@@ -45,9 +44,9 @@ const App = () => {
 					path='/notes/:noteId' 
 					element={<NoteDetail notes={notes} />}
 				/>
-				<Route path='/notes' element={<Notes />} />
+				<Route path='/notes' element={<Notes user={user}/>} />
 				<Route path='/users' element={<Users />} />
-				<Route path='/login' element={<Login />}/>
+				<Route path='/login' element={<Login login={login}/>} />
 				<Route path='/' element={<Home />} />
 			</Routes>
 		</BrowserRouter>

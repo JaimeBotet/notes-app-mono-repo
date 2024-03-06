@@ -1,12 +1,10 @@
 import Note from './components/Note'
 import NoteForm from './components/NoteForm';
 import Notification from './components/Notification';
-import { useUser } from './hooks/useUser'
 import { useNotes } from './hooks/useNotes'
 
-const Notes = (props) => {
+const Notes = ({user}) => {
 	const { notes, addNote, errorMessage, toggleImportanceOf } = useNotes()
-	const { user } = useUser()
 
 	return (
 		<div>

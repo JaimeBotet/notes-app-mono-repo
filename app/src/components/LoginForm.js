@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 // import PropTypes from 'prop-types'
-import { useUser } from '../hooks/useUser'
 import { useNavigate } from 'react-router-dom';
 
 const useField = ({type}) => {
@@ -17,12 +16,10 @@ const useField = ({type}) => {
 	}
 }
 
-
-export default function LoginForm () {
+export default function LoginForm ({login}) {
 	const navigate = useNavigate()
 	const username = useField({type: 'text'})
 	const password = useField({type: 'password'})
-	const { user, login } = useUser()
 	const [errorMessage, setErrorMessage] 	= useState('')
 
 	const handleLogin = async (event) => {

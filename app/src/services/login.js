@@ -7,5 +7,4 @@ const login = async (credentials) => {
 	return data
 }
 
-
 export { login }

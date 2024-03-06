@@ -2,9 +2,7 @@ import {useEffect, useState} from "react"
 import { setToken } from '../services/notes'
 import {login as loginService } from '../services/login'
 
-export const useUser = () => {
-	const [user, setUser] = useState(null)
-
+export const useUser = (user, setUser) => {
 	useEffect( () => {
 		const loggedUserJson = localStorage.getItem('loggedNoteAppUser')
 		if(loggedUserJson){
@@ -19,6 +17,7 @@ export const useUser = () => {
 			username,
 			password
 		})
+
 		localStorage.setItem('loggedNoteAppUser', JSON.stringify(user))
 		setToken(user.token);
 		setUser(user);
