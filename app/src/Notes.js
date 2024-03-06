@@ -2,6 +2,7 @@ import Note from './components/Note'
 import NoteForm from './components/NoteForm';
 import Notification from './components/Notification';
 import { useNotes } from './hooks/useNotes'
+import Table from 'react-bootstrap/Table'
 
 const Notes = ({user}) => {
 	const { notes, addNote, errorMessage, toggleImportanceOf } = useNotes()
@@ -14,14 +15,17 @@ const Notes = ({user}) => {
 
 			{ user ? <NoteForm addNote={addNote} /> : ""}
 
-			<ol>
-				{notes.map( note => 
-					<Note 
-						key={note.id} 
-						{...note} 
-					/>
-				)}
-			</ol>
+			<Table striped>
+				<tbody>
+					{notes.map( note => 
+						<tr key={note.id}>
+							<Note 
+								{...note} 
+							/>							
+						</tr>
+					)}
+				</tbody>
+			</Table>
 		</div>
 	);
 }

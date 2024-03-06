@@ -5,6 +5,7 @@ import Login from './Login'
 import { NoteDetail } from "./components/NoteDetail"
 import { useUser } from './hooks/useUser'
 import { useNotes } from './hooks/useNotes'
+import { Nav, Navbar } from "react-bootstrap";
 
 const Home = () => <h1>Home Page</h1>
 const Users = () => <h1>Users</h1>
@@ -20,35 +21,51 @@ const App = () => {
 
 	return (
 		<BrowserRouter>
-			<header>
-				<Link to='/' style={inlineStyles}>
-					Home
-				</Link>
-				
-				<Link to='/notes' style={inlineStyles}>
-					Notes
-				</Link>
-				
-				<Link to='/users' style={inlineStyles}>
-					Users
-				</Link>
-				{
-					user 
-						? <Link onClick={() => logout()}>Logout</Link>
-						: <Link to='/login' style={inlineStyles}>Login</Link>
-				}
-			</header>
+			<div className="container">
+				<Navbar collapseOnSelect expand='lg'>
+					<Navbar.Toggle aria-controls="responsive-narvbar-nav" />
 
-			<Routes>
-				<Route 
-					path='/notes/:noteId' 
-					element={<NoteDetail notes={notes} />}
-				/>
-				<Route path='/notes' element={<Notes user={user}/>} />
-				<Route path='/users' element={<Users />} />
-				<Route path='/login' element={<Login login={login}/>} />
-				<Route path='/' element={<Home />} />
-			</Routes>
+					<Navbar.Collapse>
+						<Nav>
+							<Link to='/' style={inlineStyles}>
+								<Nav.Link as="div">
+										Home
+								</Nav.Link>
+							</Link>
+							
+							<Link to='/notes' style={inlineStyles}>
+								<Nav.Link as="div">
+										Notes
+								</Nav.Link>
+							</Link>
+
+							<Link to='/users' style={inlineStyles}>
+								<Nav.Link as="div">
+										Users
+								</Nav.Link>
+							</Link>
+
+							{
+								user 
+									? <Link onClick={() => logout()} style={inlineStyles}><Nav.Link as="div">Logout</Nav.Link></Link>
+									: <Link to='/login' style={inlineStyles}><Nav.Link as="div">Login</Nav.Link></Link>
+							}
+
+						</Nav>
+					</Navbar.Collapse>
+				</Navbar>
+
+				<Routes>
+					<Route 
+						path='/notes/:noteId' 
+						element={<NoteDetail notes={notes} />}
+					/>
+					<Route path='/notes' element={<Notes user={user}/>} />
+					<Route path='/users' element={<Users />} />
+					<Route path='/login' element={<Login login={login}/>} />
+					<Route path='/' element={<Home />} />
+				</Routes>
+			</div>
 		</BrowserRouter>
 	)
 }

@@ -5,18 +5,18 @@
   "description": "",
   "main": "index.js",
   "workspaces": [
-	"api",
-	"app"
+    "api",
+    "app"
   ],
   "engines": {
-	"node": "18.15.0",
-	"npm": "9.5.0"
+    "node": "18.15.0",
+    "npm": "9.5.0"
   },
   "scripts": {
     "build": "set SKIP_PREFLIGHT_CHECK=true && npm run build -w app",
-	"start": "npm run start -w api",
-	"dev:app": "set SKIP_PREFLIGHT_CHECK=true && npm run start -w app",
-	"dev:api": "npm run build && npm run dev -w api"
+    "start": "npm run start -w api",
+    "dev:app": "set SKIP_PREFLIGHT_CHECK=true && npm run start -w app",
+    "dev:api": "npm run build && npm run dev -w api"
   },
   "keywords": [],
   "author": "",
